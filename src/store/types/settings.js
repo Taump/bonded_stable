@@ -1,0 +1,2 @@
+export const ADD_WALLET = "ADD_WALLET";
+export const CHANGE_ACTIVE_WALLET = "CHANGE_ACTIVE_WALLET";
