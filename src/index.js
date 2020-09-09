@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import "antd/dist/antd.css";
+import "./index.css";
 import AppRouter from "./AppRouter";
 import configureStore from "./store";
 

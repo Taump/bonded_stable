@@ -1,7 +1,19 @@
-export default (value, onSuccess, onError, maxValue, minValue, isInteger) => {
+export default (
+  value,
+  onSuccess,
+  onError,
+  maxValue,
+  minValue,
+  isInteger,
+  maxDecimals
+) => {
   let error = null;
   const reg = /^[0-9.]+$/g;
   const int = /^[0-9]+$/g;
+  if (value === "") {
+    onError && onError();
+    return Promise.resolve();
+  }
   if (reg.test(value)) {
     if (Number(value) > minValue || minValue === undefined) {
       if (maxValue && Number(value) > maxValue) {
@@ -15,8 +27,20 @@ export default (value, onSuccess, onError, maxValue, minValue, isInteger) => {
             error = "Value must be an integer";
           }
         } else {
-          onSuccess && onSuccess();
-          return Promise.resolve();
+          if (
+            maxDecimals &&
+            (~(value + "").indexOf(".")
+              ? (value + "").split(".")[1].length
+              : 0) <= maxDecimals
+          ) {
+            onSuccess && onSuccess();
+            return Promise.resolve();
+          } else if (maxDecimals === undefined) {
+            onSuccess && onSuccess();
+            return Promise.resolve();
+          } else {
+            error = `Max decimals is ${maxDecimals}`;
+          }
         }
       }
     } else {

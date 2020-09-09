@@ -1,4 +1,5 @@
 import { LOAD_LIST_SUCCESS, LOAD_LIST_REQUEST } from "../types";
+import { RESPONSE_ISSUE_STABLECOIN } from "../types/pendings";
 const initialState = {
   data: {},
   loading: false,
@@ -22,6 +23,12 @@ export const listReducer = (state = initialState, action) => {
         loading: false,
         loaded: true,
       };
+    case RESPONSE_ISSUE_STABLECOIN: {
+      return {
+        ...state,
+        data: { ...state.data, [action.payload.address]: action.payload.data },
+      };
+    }
     default:
       return state;
   }

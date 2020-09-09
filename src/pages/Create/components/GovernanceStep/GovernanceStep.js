@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, Row, Col, Select, Button, Steps } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Row, Col, Select, Button } from "antd";
+
 import { Label } from "components/Label/Label";
-import styles from "../../CreatePage.module.css";
 import { validator } from "utils/validators";
 import { getStatusVaild } from "utils/getStatusVaild";
 
+import styles from "../../CreatePage.module.css";
+
 const { useForm } = Form;
-const { Step } = Steps;
 const initialValues = {
   regular_challenging_period: 3 * 24 * 3600,
   important_challenging_period: 30 * 24 * 3600,
   freeze_period: 30 * 24 * 3600,
   proposal_min_support: 0.5,
 };
+
 export const GovernanceStep = ({ setCurrent, setData }) => {
   const [form] = useForm();
 
@@ -87,7 +89,13 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
             hasFeedback
             validateStatus={getStatusVaild(validFields.allow_grants)}
             name="allow_grants"
-            label={<Label label="Allow grants" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Allow grants"
+                descr="Whether to allow paying grants to teams that promise to promote the use of the stablecoin. Grants are voted on by Token1 holders, and if approved, they dilute Token1 holders."
+              />
+            }
             rules={[
               {
                 validator: (rule, value) =>
@@ -111,7 +119,13 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
             hasFeedback
             name="allow_oracle_change"
             validateStatus={getStatusVaild(validFields.allow_oracle_change)}
-            label={<Label label="Allow oracle change" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Allow oracle change"
+                descr="Whether to allow updating the oracles by Token1 holders vote after the stablecoin AA is created."
+              />
+            }
             rules={[
               {
                 validator: (rule, value) =>
@@ -150,7 +164,11 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
               },
             ]}
             label={
-              <Label label="Regular challenging period" descr="Test test" />
+              <Label
+                required
+                label="Regular challenging period"
+                descr="Challenging period (in seconds) for votes by Token1 holders on regular issues."
+              />
             }
           >
             <Input
@@ -169,9 +187,6 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
               validFields.important_challenging_period
             )}
             name="important_challenging_period"
-            validateStatus={
-              validFields.important_challenging_period ? "success" : "error"
-            }
             rules={[
               {
                 validator: (rule, value) =>
@@ -185,7 +200,11 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
               },
             ]}
             label={
-              <Label label="Important challenging period" descr="Test test" />
+              <Label
+                required
+                label="Important challenging period"
+                descr="Challenging period (in seconds) for votes by Token1 holders on important issues such as changing an oracle."
+              />
             }
           >
             <Input
@@ -212,7 +231,13 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Freeze period" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Freeze period"
+                descr="How long (in seconds) the voting tokens of the supporters of the winning option are frozen after the decision is made."
+              />
+            }
           >
             <Input
               placeholder="Freeze period"
@@ -239,7 +264,13 @@ export const GovernanceStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Proposal min support" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Proposal min support"
+                descr="What share of the total Token1 supply should vote for a grant proposal for the proposal to be eligible to win."
+              />
+            }
           >
             <Input
               placeholder="Proposal min support"

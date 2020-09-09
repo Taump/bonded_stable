@@ -12,6 +12,7 @@ export const validator = ({
   maxValue,
   minValue,
   isInteger,
+  maxDecimals,
 }) => {
   switch (type) {
     case "symbol": {
@@ -50,7 +51,15 @@ export const validator = ({
         onError ? () => onError() : undefined,
         maxValue,
         minValue,
-        isInteger
+        isInteger,
+        maxDecimals
+      );
+    }
+    default: {
+      return symbol(
+        value,
+        onSuccess ? () => onSuccess() : undefined,
+        onError ? () => onError() : undefined
       );
     }
   }

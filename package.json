@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.3.5",
+    "axios": "^0.20.0",
     "decimal.js": "^10.2.0",
     "lodash": "^4.17.19",
     "obyte": "^0.1.9",
@@ -27,7 +28,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "react/jsx-no-target-blank": "off",
+      "jsx-a11y/anchor-is-valid": "off"
+    }
   },
   "browserslist": {
     "production": [

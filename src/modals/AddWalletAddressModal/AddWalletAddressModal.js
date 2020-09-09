@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, Form, Input, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import obyte from "obyte";
 import { addWallet } from "store/actions/settings/addWallet";
 

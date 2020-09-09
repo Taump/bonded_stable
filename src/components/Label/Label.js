@@ -1,14 +1,24 @@
 import React from "react";
 import { Tooltip } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 
-export const Label = ({ label, descr }) => {
+export const Label = ({
+  label,
+  descr,
+  required = false,
+  type = "attention",
+}) => {
   return (
     <span style={{ display: "flex", alignItems: "center" }}>
-      <span style={{ paddingRight: 5 }}>{label}</span>
+      <span style={{ paddingRight: 5 }}>
+        {label}
+        {required && <span style={{ color: "red" }}>*</span>}
+      </span>
       <Tooltip title={descr}>
-        {" "}
-        <ExclamationCircleOutlined />
+        <InfoCircleOutlined />
       </Tooltip>
     </span>
   );

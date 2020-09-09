@@ -1,12 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Result } from "antd";
-import { WalletOutlined } from "@ant-design/icons";
+import { WalletOutlined, LoadingOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+
+import { generateLink } from "utils/generateLink";
+import { pendingIssue } from "store/actions/pendings/pendingIssue";
+import { resetIssueStablecoin } from "store/actions/pendings/resetIssueStablecoin";
+import { changeActive } from "store/actions/active/changeActive";
 
 import config from "config";
-import { generateLink } from "utils/generateLink";
 
 export const CreateStep = ({ data, setCurrent }) => {
-  const link = generateLink(1e5, data, undefined, config.FACTORY_AA);
+  const pendings = useSelector((state) => state.pendings.stablecoin);
+  const { sendReq, addressIssued } = pendings;
+  const dispatch = useDispatch();
+  const link = generateLink(1e4, data, undefined, config.FACTORY_AA);
+
+  useEffect(() => {
+    dispatch(pendingIssue(data));
+  }, [dispatch, data]);
+
+  if (addressIssued) {
+    dispatch(changeActive(addressIssued));
+    dispatch(resetIssueStablecoin());
+  }
+
+  if (sendReq) {
+    return (
+      <Result
+        icon={<LoadingOutlined />}
+        title="We have received your request"
+        subTitle="Once the transaction is stable, you will move to your stablecoin"
+        extra={[
+          <Button
+            onClick={() => {
+              setCurrent(0);
+              dispatch(resetIssueStablecoin());
+            }}
+            type="danger"
+            key="CreateStep-reset-req"
+          >
+            Close
+          </Button>,
+        ]}
+      />
+    );
+  }
+
   return (
     <Result
       status="info"

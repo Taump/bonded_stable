@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Steps } from "antd";
+
 import { MainLayout } from "components/MainLayout/MainLayout";
 import { useWindowSize } from "hooks/useWindowSize";
 import { CurverStep } from "./components/CurveStep/CurveStep";
@@ -16,8 +17,8 @@ export const CreatePage = () => {
   const [width] = useWindowSize();
 
   return (
-    <MainLayout>
-      <Title level={2}>Create</Title>
+    <div>
+      <Title level={1}>Create</Title>
       <Steps
         size="large"
         current={current}
@@ -41,6 +42,11 @@ export const CreatePage = () => {
         <GovernanceStep setCurrent={setCurrent} setData={setData} />
       )}
       {current === 3 && <CreateStep setCurrent={setCurrent} data={data} />}
-    </MainLayout>
+      {current !== 3 && (
+        <div style={{ fontSize: 16, paddingTop: 18 }}>
+          <span style={{ color: "red " }}>*</span> - This field is required
+        </div>
+      )}
+    </div>
   );
 };

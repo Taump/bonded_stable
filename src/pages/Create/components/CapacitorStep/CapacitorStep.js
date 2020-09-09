@@ -4,6 +4,7 @@ import { Form, Input, Row, Col, Button } from "antd";
 import { validator } from "utils/validators";
 import { getStatusVaild } from "utils/getStatusVaild";
 import { Label } from "components/Label/Label";
+
 import styles from "../../CreatePage.module.css";
 
 const { useForm } = Form;
@@ -12,6 +13,7 @@ const initialValues = {
   moved_capacity_share: 0.1,
   threshold_distance: 0.1,
   move_capacity_timeout: 2 * 3600,
+  slow_capacity_share: 0.5,
 };
 
 export const CapacitorStep = ({ setCurrent, setData }) => {
@@ -21,7 +23,7 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
     moved_capacity_share: true,
     threshold_distance: true,
     move_capacity_timeout: true,
-    slow_capacity_share: undefined,
+    slow_capacity_share: true,
   });
   const nextIsActive =
     validFields.fee_multiplier &&
@@ -72,7 +74,13 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Fee multiplier" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Fee multiplier"
+                descr="Multiplier used to calculate fees charged for moving the price away from the peg. The larger the multiplier, the larger the fees paid by users for moving the price off-peg."
+              />
+            }
           >
             <Input
               placeholder="Fee multiplier"
@@ -98,7 +106,11 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
               },
             ]}
             label={
-              <Label label="Moved capacity share" descr="Test test test" />
+              <Label
+                required
+                label="Moved capacity share"
+                descr="Part of the slow capacitor that is moved into the fast capacitor after a timeout."
+              />
             }
           >
             <Input placeholder="Moved capacity share" autoComplete="off" />
@@ -120,7 +132,13 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Threshold distance" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Threshold distance"
+                descr="Threshold distance from the target price that triggers the countdown before moving funds from the slow to the fast capacitor."
+              />
+            }
           >
             <Input
               placeholder="Threshold distance"
@@ -148,7 +166,13 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Move capacity timeout" descr="Test test" />}
+            label={
+              <Label
+                required
+                label="Move capacity timeout"
+                descr="How long we wait (in seconds) before moving part of the slow capacity into the fast one."
+              />
+            }
           >
             <Input
               placeholder="Move capacity timeout"
@@ -172,7 +196,13 @@ export const CapacitorStep = ({ setCurrent, setData }) => {
                   }),
               },
             ]}
-            label={<Label label="Slow capacity share" descr="Test test test" />}
+            label={
+              <Label
+                required
+                label="Slow capacity share"
+                descr="Share of fees that goes into the slow capacitor. The rest goes into the fast one."
+              />
+            }
           >
             <Input placeholder="Slow capacity share" autoComplete="off" />
           </Form.Item>

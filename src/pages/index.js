@@ -1,3 +1,6 @@
-export { HomePage } from "./Home/HomePage";
+export { MainPage } from "./Main/MainPage";
 export { CreatePage } from "./Create/CreatePage";
-export { SettingsPage } from "./Settings/SettingsPage";
+export { HomePage } from "./Home/HomePage";
+export { HowItWorksPage } from "./HowItWorks/HowItWorksPage";
+export { FaqPage } from "./Faq/FaqPage";
+export { BuyPage } from "./Buy/BuyPage";

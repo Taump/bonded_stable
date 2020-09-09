@@ -1,6 +1,7 @@
 import { Decimal as DecimalDefault } from "decimal.js";
 
 const Decimal = DecimalDefault.clone({ precision: 15 });
+
 export const $get_turnover = (
   reserve_payout,
   tokens1,
@@ -53,9 +54,9 @@ export const $get_growth_factor = (
   rate_update_ts,
   growth_factor
 ) => {
-  const term = new Decimal(timestamp - rate_update_ts).div(360 * 24 * 3600);
+  const term = (timestamp - rate_update_ts) / (360 * 24 * 3600);
+  const result = growth_factor * (1 + interest_rate) ** term;
 
-  const result = Decimal.pow(growth_factor * (1 + interest_rate), term);
   return result;
 };
 
@@ -86,6 +87,8 @@ export const $get_exchange_result = ({
   params,
   oracle_price,
   timestamp,
+  oracleValueReserve,
+  send_reserve,
 }) => {
   let {
     growth_factor,
@@ -103,12 +106,12 @@ export const $get_exchange_result = ({
     decimals1,
     decimals2,
     reserve_asset_decimals,
+    reserve_asset,
     m,
     n,
     fee_multiplier,
     interest_rate,
   } = params;
-
   const fast_capacity_share = 1 - slow_capacity_share;
   const initial_p2 = vars.p2;
   const target_p2 = $get_target_p2(
@@ -133,6 +136,7 @@ export const $get_exchange_result = ({
   const reserve_delta = new_reserve - reserve;
   const new_distance = Math.abs(p2 - target_p2) / target_p2;
   const avg_reserve = (reserve + new_reserve) / 2;
+
   let fee,
     reward,
     reserve_needed,
@@ -140,6 +144,7 @@ export const $get_exchange_result = ({
     new_fast_capacity,
     distance_share,
     reverse_reward;
+
   if (distance === 0 && new_distance === 0) {
     fee = 0;
     reward = 0;
@@ -154,12 +159,14 @@ export const $get_exchange_result = ({
     reverse_reward = distance_share * new_fast_capacity;
     if (regular_fee >= reverse_reward) {
       fee = regular_fee;
-    } else
+    } else {
       fee = Decimal.ceil(
         new Decimal(distance_share)
           .div(1 - distance_share * fast_capacity_share)
           .mul(fast_capacity)
       ).toNumber();
+    }
+
     reserve_needed = reserve_delta + fee; // negative for payouts
   } else {
     // going towards the target price - get a reward
@@ -168,20 +175,49 @@ export const $get_exchange_result = ({
     reserve_needed = reserve_delta - reward; // negative for payouts
   }
 
-  const initedP = new Decimal(s1)
-    .pow(m)
-    .mul(n)
-    .mul(dilution_factor)
-    .pow(1 / (n - 1))
-    .toNumber();
-
-  const initedTargetP = new Decimal(target_p2).pow(1 / (n - 1)).toNumber();
-  const s2init = Number(initedTargetP / initedP).toFixed(decimals2);
   const turnover = $get_turnover(-reserve_delta, tokens1, tokens2, p2);
   const fee_percent = (fee / turnover) * 100;
   const reward_percent = (reward / turnover) * 100;
+  const network_fee = 1e3;
+  const full_network_fee = network_fee;
+
+  const reserve_asset_amount = 1e4 - full_network_fee;
+
+  const payout = reserve_asset_amount - reserve_needed;
+
+  const s1init = initial_p2
+    ? (initial_p2 /
+        (dilution_factor *
+          n *
+          (Number.isInteger(n * 2)
+            ? Math.sqrt(s2 ** ((n - 1) * 2))
+            : s2 ** (n - 1)))) **
+      (1 / m)
+    : (target_p2 /
+        (dilution_factor *
+          n *
+          (Number.isInteger(n * 2)
+            ? Math.sqrt(s2 ** ((n - 1) * 2))
+            : s2 ** (n - 1)))) **
+      (1 / m);
+
+  const p1 = m * s1 ** (m - 1) * s2 ** n * dilution_factor;
+
+  const s2p = oracleValueReserve
+    ? ((p2 * tokens2) / 10 ** 9) * oracleValueReserve
+    : (p2 * tokens2) / 10 ** 9;
+
+  const s1p = oracleValueReserve
+    ? ((p1 * tokens1) / 10 ** 9) * oracleValueReserve
+    : (p1 * tokens1) / 10 ** 9;
+
+  const reserve_needed_in_сurrency =
+    (oracleValueReserve / 10 ** reserve_asset_decimals) * reserve_needed;
+
   return {
-    s2init,
+    s2p: s2p || 0,
+    s1p: s1p || 0,
+    s1init: initial_p2 ? s1init - supply1 / 10 ** decimals1 : s1init,
     reserve_needed,
     reserve_delta,
     fee,
@@ -193,5 +229,7 @@ export const $get_exchange_result = ({
     slow_capacity_share,
     fee_percent,
     reward_percent,
+    payout,
+    reserve_needed_in_сurrency,
   };
 };

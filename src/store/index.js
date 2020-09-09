@@ -7,11 +7,13 @@ import { listReducer } from "./reducers/list";
 import socket from "../services/socket";
 import { activeReducer } from "./reducers/active";
 import { connectionReducer } from "./reducers/connection";
+import { pendingsReducer } from "./reducers/pendings";
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
   list: listReducer,
   active: activeReducer,
+  pendings: pendingsReducer,
   connected: connectionReducer,
 });
 

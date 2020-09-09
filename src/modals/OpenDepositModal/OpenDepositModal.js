@@ -1,9 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, Form, Input, Modal, Space } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Space,
+  Typography,
+  Select,
+  Divider,
+} from "antd";
 import obyte from "obyte";
 import { generateLink } from "utils/generateLink";
 import { redirect } from "utils/redirect";
+import { getStatusVaild } from "utils/getStatusVaild";
+import config from "../../config";
+
+const { Text } = Typography;
 
 export const OpenDepositModal = ({
   visible,
@@ -12,22 +24,50 @@ export const OpenDepositModal = ({
   deposit_aa,
   activeWallet,
   decimals,
+  growth_factor,
+  new_growth_factor,
+  symbol,
 }) => {
-  const dispatch = useDispatch();
   const addressInput = useRef(null);
   const [amount, setAmount] = useState({
     value: undefined,
     valid: undefined,
   });
+  const [interestRecipient, setInterestRecipient] = useState({
+    value: undefined,
+    valid: undefined,
+  });
 
-  const handleChange = (ev) => {
+  const [selectAddress, setSelectAddress] = useState(undefined);
+  const [recepients, setRecepients] = useState(config.interestRecepients);
+
+  const handleChangeAmount = (ev) => {
     const value = ev.target.value;
     const reg = /^[0-9.]+$/;
 
-    if (reg.test(String(value)) || value === "") {
-      setAmount({ value, valid: true });
+    if (value === "" || value === "0") {
+      setAmount({ value, valid: undefined });
     } else {
-      setAmount({ value, valid: false });
+      if (
+        (~(value + "").indexOf(".") ? (value + "").split(".")[1].length : 0) <=
+        decimals
+      ) {
+        if (reg.test(String(value))) {
+          setAmount({ value, valid: true });
+        } else {
+          setAmount({ value, valid: false });
+        }
+      }
+    }
+  };
+
+  const handleChangeRecipient = (ev) => {
+    const value = ev.target.value;
+
+    if (obyte.utils.isValidAddress(value)) {
+      setInterestRecipient({ value, valid: true });
+    } else {
+      setInterestRecipient({ value, valid: false });
     }
   };
 
@@ -43,6 +83,7 @@ export const OpenDepositModal = ({
   const handleCancel = () => {
     setVisible(false);
     setAmount({ value: undefined, valid: undefined });
+    setInterestRecipient({ value: undefined, valid: undefined });
   };
 
   useEffect(() => {
@@ -51,13 +92,24 @@ export const OpenDepositModal = ({
     }
   }, [visible]);
 
+  useEffect(() => {
+    setSelectAddress(undefined);
+  }, [visible, setSelectAddress]);
+
   const link = generateLink(
     amount.value * 10 ** decimals,
-    {},
+    selectAddress ? { interest_recipient: selectAddress } : {},
     activeWallet,
     deposit_aa,
     encodeURIComponent(asset)
   );
+  const stable_amount = Math.floor(
+    amount.value * 10 ** decimals * growth_factor
+  );
+  const new_stable_amount = Math.floor(
+    amount.value * 10 ** decimals * new_growth_factor
+  );
+  const interest = new_stable_amount - stable_amount;
 
   return (
     <Modal
@@ -74,7 +126,7 @@ export const OpenDepositModal = ({
           <Button
             key="add"
             type="primary"
-            disabled={!amount.valid}
+            disabled={!amount.valid || Number(amount.value) === 0}
             href={link}
             onClick={() =>
               setTimeout(() => {
@@ -90,12 +142,12 @@ export const OpenDepositModal = ({
       <Form size="large">
         <Form.Item hasFeedback={true} validateStatus={validateStatus}>
           <Input
-            placeholder="Amount tokens2"
+            placeholder={`Amount of tokens2 (${symbol || asset})`}
             value={amount.value}
-            onChange={handleChange}
+            onChange={handleChangeAmount}
             ref={addressInput}
             autoFocus={true}
-            suffix={asset.slice(0, 4) + "..."}
+            suffix={symbol ? symbol : "Tokens2"}
             onKeyPress={(ev) => {
               if (ev.key === "Enter") {
                 redirect(link);
@@ -106,6 +158,99 @@ export const OpenDepositModal = ({
             }}
           />
         </Form.Item>
+        {/* <Form.Item
+          hasFeedback={true}
+          validateStatus={
+            interestRecipient.value !== ""
+              ? getStatusVaild(interestRecipient.valid)
+              : undefined
+          }
+        >
+          <Input
+            placeholder="Address of the interest recipient if other than yourself"
+            onChange={handleChangeRecipient}
+            value={interestRecipient.value}
+          />
+        </Form.Item> */}
+
+        <Form.Item>
+          <Select
+            placeholder="Select interest recepient"
+            value={selectAddress}
+            onChange={(value, option) => {
+              // setAddress({ value, valid: value !== "" });
+              setSelectAddress(value);
+              console.log("option", option);
+            }}
+            dropdownRender={(menu) => (
+              <div>
+                {menu}
+                <Divider style={{ margin: "4px 0" }} />
+                <div
+                  style={{ display: "flex", flexWrap: "nowrap", padding: 8 }}
+                >
+                  <Input
+                    placeholder="Address of the new interest recipient"
+                    onChange={handleChangeRecipient}
+                    value={interestRecipient.value}
+                    style={{ marginRight: 10 }}
+                  />
+                  <Button
+                    style={{
+                      flex: "none",
+                      padding: "8px",
+                      display: "block",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      if (
+                        recepients.findIndex(
+                          (r) => r.address === interestRecipient.value
+                        ) === -1
+                      ) {
+                        setRecepients((r) => [
+                          ...r,
+                          {
+                            name: interestRecipient.value,
+                            address: interestRecipient.value,
+                          },
+                        ]);
+
+                        setSelectAddress(interestRecipient.value);
+
+                        setInterestRecipient({
+                          value: undefined,
+                          valid: undefined,
+                        });
+                      }
+                    }}
+                    disabled={!interestRecipient.valid}
+                  >
+                    Add your own
+                  </Button>
+                </div>
+              </div>
+            )}
+          >
+            <Select.Option key="Me" value={activeWallet}>
+              Me
+            </Select.Option>
+            {recepients.map((r) => (
+              <Select.Option key={r.address} value={r.address}>
+                {r.name}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        {amount.valid && Number(amount.value) !== 0 && (
+          <p>
+            <Text type="secondary">
+              in 30 days you will receive ~{interest / 10 ** decimals} stable
+              coins
+            </Text>
+          </p>
+        )}
       </Form>
     </Modal>
   );
