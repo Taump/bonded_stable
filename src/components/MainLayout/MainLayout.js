@@ -63,7 +63,7 @@ export const MainLayout = (props) => {
               </Drawer>
             </>
           )}
-          {width >= 990 && pathname !== "/" && (
+          {width >= 1100 && pathname !== "/" && (
             <div style={{ marginLeft: "auto" }}>
               <SelectWallet />
             </div>

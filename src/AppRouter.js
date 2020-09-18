@@ -29,7 +29,12 @@ const AppRouter = () => {
         <Route path="/create" component={CreatePage} />
         <Route path="/how-it-works" component={HowItWorksPage} />
         <Route path="/faq" component={FaqPage} />
-        <Route path="/buy" component={BuyPage} />
+        <Route
+          path="/buy"
+          render={() => {
+            return <BuyPage />;
+          }}
+        />
         <Route path="/" component={HomePage} exact />
       </MainLayout>
     </Router>

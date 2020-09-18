@@ -62,7 +62,6 @@ export const resCreateStable = ({
       if (pendingParam !== null && isEqual) {
         const modal = Modal.confirm({
           title: "The stablecoin you created is ready to use, go to it?",
-          content: "It address is " + address,
           okText: "Yes",
           cancelText: "No",
           onOk: () => {

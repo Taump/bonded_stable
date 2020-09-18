@@ -34,32 +34,6 @@ export const HashHandler = ({ children }) => {
       });
     }
   }, [address]);
-  // useEffect(() => {
-  //   const unlisten = history.listen((location, action) => {
-  //     const splitUrl = location.pathname.split("/").slice(1);
-  //     const addressFromUrl =
-  //       splitUrl.length === 2 && splitUrl[0] === "trade" && splitUrl[1] !== ""
-  //         ? splitUrl[1]
-  //         : false;
-  //     if (action === "PUSH" || action === "PUP") {
-  //       console.log("01", splitUrl[0], addressFromUrl);
-  //       if (
-  //         splitUrl[0] === "trade" &&
-  //         (address !== addressFromUrl || addressFromUrl === "")
-  //       ) {
-  //         if (address) {
-  //           history.replace({
-  //             pathname: `/trade/${address}`,
-  //           });
-  //         }
-  //       }
-  //     }
-  //   });
-
-  //   return () => {
-  //     unlisten();
-  //   };
-  // }, [dispatch]);
 
   useEffect(() => {
     console.log(history.location.hash, "history");

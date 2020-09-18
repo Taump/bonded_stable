@@ -58,19 +58,29 @@ export const Statistics = ({ windowWidth }) => {
     if ("oracles" in actualParams) {
       if (actualParams.oracles[0].op === "*") {
         currentPrice = 1 / stable_state.p2;
-        targetPrice = 1 / target_p2;
       } else {
         currentPrice = stable_state.p2;
-        targetPrice = target_p2;
       }
     } else {
       if (actualParams.op1 === "*") {
         currentPrice = 1 / stable_state.p2;
-        targetPrice = 1 / target_p2;
       } else {
         currentPrice = stable_state.p2;
-        targetPrice = target_p2;
       }
+    }
+  }
+
+  if ("oracles" in actualParams) {
+    if (actualParams.oracles[0].op === "*") {
+      targetPrice = 1 / target_p2;
+    } else {
+      targetPrice = target_p2;
+    }
+  } else {
+    if (actualParams.op1 === "*") {
+      targetPrice = 1 / target_p2;
+    } else {
+      targetPrice = target_p2;
     }
   }
 

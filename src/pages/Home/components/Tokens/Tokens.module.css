@@ -14,17 +14,13 @@
 }
 
 a.btnOpen {
-  /* text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
-  background-color: #0037ff;
-  color: #fff; */
   background-color: #0037ff;
   text-transform: uppercase;
   font-size: 16px;
   padding: 10px 30px;
   box-sizing: border-box;
   border-radius: 5px;
+  margin-top: 10px;
   color: #ffffff;
   text-decoration: none;
   display: inline-block;

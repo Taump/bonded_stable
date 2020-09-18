@@ -40,19 +40,9 @@ export const MainPage = () => {
   const actualParams = getParams(params, stable_state);
   const location = useLocation();
   const history = useHistory();
-
-  // useEffect(() => {
-  //   console.log("location hash", location, history);
-
-  //   if (location.hash && location.hash !== currentTab) {
-  //     setCurrentTab(location.hash.slice(1));
-  //     console.log("currentTab", "XXX", location.hash.slice(1));
-  //   } else if (!location.hash) {
-  //     history.replace({ hash: currentTab });
-  //     console.log("currentTab", "YYY");
-  //   }
-  //   // history.push
-  // }, [address, location]);
+  useEffect(() => {
+    document.title = "Bonded stablecoins - Trade";
+  }, []);
 
   useEffect(() => {
     if (currentTab !== location.hash.slice(1)) {
@@ -166,7 +156,6 @@ export const MainPage = () => {
               disabled={!("reserve" in stable_state)}
               tab={
                 <span>
-                  {/* <SettingOutlined /> */}
                   <GovernanceIcon />
                   Governance
                 </span>

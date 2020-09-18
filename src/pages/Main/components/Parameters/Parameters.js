@@ -8,6 +8,8 @@ import { GovernanceParameters } from "./components/GovernanceParameters";
 import styles from "./Parameters.module.css";
 import { getParams } from "helpers/getParams";
 import config from "config";
+import { AutonomusParameters } from "./components/AutonomusParameters";
+import { TokensParameters } from "./components/TokensParameters";
 
 const { Title } = Typography;
 
@@ -60,6 +62,26 @@ export const Parameters = () => {
             curve_aa={address}
             deposit_aa={deposit_aa}
             governance_aa={governance_aa}
+          />
+          <Title level={4} type="secondary">
+            Autonomous Agents
+          </Title>
+          <AutonomusParameters
+            curve_aa={address}
+            deposit_aa={deposit_aa}
+            governance_aa={governance_aa}
+          />
+
+          <Title level={4} type="secondary">
+            Tokens
+          </Title>
+          <TokensParameters
+            asset1={stable_state.asset1}
+            asset2={stable_state.asset2}
+            asset={deposit_state.asset}
+            symbol1={symbol1}
+            symbol2={symbol2}
+            symbol3={symbol3}
           />
         </div>
         <div className={styles.column}>

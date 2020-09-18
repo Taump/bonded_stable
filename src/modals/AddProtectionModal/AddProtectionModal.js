@@ -73,21 +73,6 @@ export const AddProtectionModal = ({
           >
             Add protection
           </Button>
-          {/* <Button
-            danger
-            type="primary"
-            disabled={
-              !amount.valid || !protection || amount.value * 1e9 > protection
-            }
-            href={generateLink(
-              1e4,
-              { withdraw_protection: 1, id, amount: amount.value * 1e9 },
-              activeWallet,
-              deposit_aa
-            )}
-          >
-            Withdraw protection
-          </Button> */}
           <Button type="default" onClick={setVisible}>
             Close
           </Button>

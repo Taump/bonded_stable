@@ -4,6 +4,10 @@ import {
   CHANGE_ACTIVE,
   ADD_RECENT_STABLECOIN,
   ADD_EXCHANGE,
+  ADD_EXCHANGE_RECEPIENT,
+  ADD_EXCHANGE_PENDING,
+  REMOVE_EXCHANGE_PENDING,
+  UPDATE_EXCHANGE_FORM,
 } from "../types";
 
 const initialState = {
@@ -12,6 +16,14 @@ const initialState = {
   recent: null,
   recentList: [],
   exchanges: [],
+  exchanges_recepient: undefined,
+  pendingExchanges: undefined,
+  exchangesFormInit: {
+    currentToken: undefined,
+    amountToken: undefined,
+    currentCurrency: undefined,
+    amountCurrency: undefined,
+  },
 };
 
 export const settingsReducer = (state = initialState, action) => {
@@ -65,6 +77,30 @@ export const settingsReducer = (state = initialState, action) => {
       return {
         ...state,
         exchanges: [...state.exchanges, action.payload],
+      };
+    }
+    case ADD_EXCHANGE_RECEPIENT: {
+      return {
+        ...state,
+        exchanges_recepient: action.payload,
+      };
+    }
+    case ADD_EXCHANGE_PENDING: {
+      return {
+        ...state,
+        pendingExchanges: action.payload,
+      };
+    }
+    case REMOVE_EXCHANGE_PENDING: {
+      return {
+        ...state,
+        pendingExchanges: undefined,
+      };
+    }
+    case UPDATE_EXCHANGE_FORM: {
+      return {
+        ...state,
+        exchangesFormInit: { ...action.payload },
       };
     }
     default:

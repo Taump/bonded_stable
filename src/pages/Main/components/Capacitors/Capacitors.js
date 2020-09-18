@@ -20,7 +20,10 @@ export const Capacitors = ({ stable_state, address, params }) => {
       2 * 3600);
 
   const isExpiry = moment().unix() > timeToNextMovement;
-
+  const hours = Math.round(params.move_capacity_timeout / 3600);
+  const minutes = Math.round(
+    (params.move_capacity_timeout - 3600 * hours) / 60
+  );
   const currency =
     params.reserve_asset in config.reserves
       ? config.reserves[params.reserve_asset].name
@@ -89,12 +92,7 @@ export const Capacitors = ({ stable_state, address, params }) => {
             The capacity can be moved from the slow to the fast pool if the
             price goes off-peg by more than {params.threshold_distance * 100}%
             and stays there for more than{" "}
-            {Math.round(params.move_capacity_timeout / 3600)} hours and{" "}
-            {Math.round(
-              params.move_capacity_timeout -
-                3600 * Math.round(params.move_capacity_timeout / 3600)
-            ) + " minutes"}
-            .
+            {hours !== 0 && hours + " " + "hours and "} {minutes + " minutes"}.
           </Text>
         </p>
         <Button type="primary" href={link} disabled={!isExpiry}>

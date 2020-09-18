@@ -98,7 +98,7 @@ export const ChangeParamsModal = ({
     if (param === "move_capacity_timeout") {
       reg = /^[0-9]+$/;
     } else {
-      reg = /^[0-9.]+$/;
+      reg = /^(0|[1-9]\d*)([.,]\d+)?$/;
     }
     if (value === "" || value === "0") {
       setParamValue({ value, valid: undefined });

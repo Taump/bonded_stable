@@ -48,13 +48,10 @@ export const Issue = () => {
   if (reserve) {
     if (Number(tokens1) && tokens1 && Number(tokens2) && tokens2) {
       isActiveIssue = validFields.tokens1 && validFields.tokens2;
-      console.log(1);
     } else if (tokens1 && Number(tokens1)) {
       isActiveIssue = validFields.tokens1;
-      console.log(2);
     } else if (tokens2 && Number(tokens2)) {
       isActiveIssue = validFields.tokens2;
-      console.log(3);
     }
   } else {
     isActiveIssue =
@@ -149,17 +146,6 @@ export const Issue = () => {
       ? ((1 / amount.p2 - 1 / amount.target_p2) / (1 / amount.target_p2)) * 100
       : 0;
 
-  const clearForm = () => {
-    setValidFields({ tokens1: false, tokens2: false });
-    resetFields();
-    setTokens1(undefined);
-    setTokens2(undefined);
-    setFieldsValue({
-      tokens1: undefined,
-      tokens2: undefined,
-    });
-    setAmount(undefined);
-  };
   const f = (x) => (~(x + "").indexOf(".") ? (x + "").split(".")[1].length : 0);
   return (
     <>

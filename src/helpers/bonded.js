@@ -204,12 +204,12 @@ export const $get_exchange_result = ({
   const p1 = m * s1 ** (m - 1) * s2 ** n * dilution_factor;
 
   const s2p = oracleValueReserve
-    ? ((p2 * tokens2) / 10 ** 9) * oracleValueReserve
-    : (p2 * tokens2) / 10 ** 9;
+    ? ((p2 * tokens2) / 10 ** decimals2) * oracleValueReserve
+    : (p2 * tokens2) / 10 ** decimals2;
 
   const s1p = oracleValueReserve
-    ? ((p1 * tokens1) / 10 ** 9) * oracleValueReserve
-    : (p1 * tokens1) / 10 ** 9;
+    ? ((p1 * tokens1) / 10 ** decimals1) * oracleValueReserve
+    : (p1 * tokens1) / 10 ** decimals1;
 
   const reserve_needed_in_сurrency =
     (oracleValueReserve / 10 ** reserve_asset_decimals) * reserve_needed;

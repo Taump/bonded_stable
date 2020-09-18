@@ -264,7 +264,7 @@ export const CurveParameters = ({
         <span>{interest_rate * 100} %</span>
       </div>
 
-      <div className={styles.param}>
+      {/* <div className={styles.param}>
         <div className={styles.labelWrap}>
           Asset1
           <span style={{ marginRight: 5 }}>:</span>
@@ -315,9 +315,9 @@ export const CurveParameters = ({
             {asset}
           </a>
         </span>
-      </div>
+      </div> */}
 
-      <div className={styles.param}>
+      {/* <div className={styles.param}>
         <div className={styles.labelWrap}>
           Autonomous Agent of deposits
           <span style={{ marginRight: 5 }}>:</span>
@@ -369,9 +369,9 @@ export const CurveParameters = ({
             {governance_aa}
           </a>
         </span>
-      </div>
+      </div> */}
 
-      {symbol1 && (
+      {/* {symbol1 && (
         <div className={styles.param}>
           <div className={styles.labelWrap}>
             Symbol for tokens1
@@ -397,7 +397,7 @@ export const CurveParameters = ({
           </div>
           <span>{symbol3}</span>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

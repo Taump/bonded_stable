@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Steps } from "antd";
-
-import { MainLayout } from "components/MainLayout/MainLayout";
 import { useWindowSize } from "hooks/useWindowSize";
 import { CurverStep } from "./components/CurveStep/CurveStep";
 import { CapacitorStep } from "./components/CapacitorStep/CapacitorStep";
@@ -15,7 +13,9 @@ export const CreatePage = () => {
   const [current, setCurrent] = useState(0);
   const [data, setData] = useState({});
   const [width] = useWindowSize();
-
+  useEffect(() => {
+    document.title = "Bonded stablecoins - Create";
+  }, []);
   return (
     <div>
       <Title level={1}>Create</Title>

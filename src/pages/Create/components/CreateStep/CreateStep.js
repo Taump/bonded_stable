@@ -29,8 +29,8 @@ export const CreateStep = ({ data, setCurrent }) => {
     return (
       <Result
         icon={<LoadingOutlined />}
-        title="We have received your request"
-        subTitle="Once the transaction is stable, you will move to your stablecoin"
+        title="Request received"
+        subTitle="Once the transaction is stable, you'll be redirected to the page of the new stablecoin"
         extra={[
           <Button
             onClick={() => {
@@ -51,8 +51,8 @@ export const CreateStep = ({ data, setCurrent }) => {
     <Result
       status="info"
       icon={<WalletOutlined />}
-      title="We are waiting for your request"
-      subTitle="Please click on the «Create» button and send the data using your wallet."
+      title="Almost ready!"
+      subTitle="Please click the «Create» button below, this will open your Obyte wallet and you'll send a transaction that will create the new stablecoin."
       extra={[
         <Button href={link} type="primary" key="CreateStep-create">
           Create

@@ -45,45 +45,45 @@ export const RedeemToken = ({
     setValid(undefined);
   }, [address, resetFields]);
 
+  // useEffect(() => {
+  //   const check = async () => {
+  //     const paramsDry1 = {
+  //       address,
+  //       trigger: {
+  //         outputs: {
+  //           base: 10000,
+  //           [asset]: Number(tokens).toFixed(decimals) * 10 ** decimals,
+  //         },
+  //         address: activeWallet || "2QVJOY3BRRGWP7IOYL64O5BU3WLUJ4TZ",
+  //       },
+  //     };
+
+  //     try {
+  //       if (valid) {
+  //         if (tokens !== "") {
+  //           const dry = await socket.api.dryRunAa(paramsDry1);
+  //           if ("bounced" in dry[0] && dry[0].bounced) {
+  //             setExchange(null);
+  //             return null;
+  //           }
+
+  //           if (dry[0] != undefined && tokens !== undefined && tokens !== "") {
+  //             const DryObj = dry[0];
+
+  //             if ("response" in DryObj && "responseVars" in DryObj.response) {
+  //               const vars = DryObj.response.responseVars;
+  //               setExchange(vars);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     } catch (e) {
+  //       setExchange(null);
+  //     }
+  //   };
+
+  //   // check();
   useEffect(() => {
-    const check = async () => {
-      const paramsDry1 = {
-        address,
-        trigger: {
-          outputs: {
-            base: 10000,
-            [asset]: Number(tokens).toFixed(decimals) * 10 ** decimals,
-          },
-          address: activeWallet || "2QVJOY3BRRGWP7IOYL64O5BU3WLUJ4TZ",
-        },
-      };
-
-      try {
-        if (valid) {
-          if (tokens !== "") {
-            const dry = await socket.api.dryRunAa(paramsDry1);
-            if ("bounced" in dry[0] && dry[0].bounced) {
-              setExchange(null);
-              return null;
-            }
-
-            if (dry[0] != undefined && tokens !== undefined && tokens !== "") {
-              const DryObj = dry[0];
-
-              if ("response" in DryObj && "responseVars" in DryObj.response) {
-                const vars = DryObj.response.responseVars;
-                setExchange(vars);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        setExchange(null);
-      }
-    };
-
-    // check();
-
     const get_exchange_result =
       actualParams &&
       $get_exchange_result({
