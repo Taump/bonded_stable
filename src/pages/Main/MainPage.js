@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Tabs, Col, Row, BackTop } from "antd";
-import { MainLayout } from "components/MainLayout/MainLayout";
 import {
-  SettingOutlined,
   InteractionOutlined,
   ImportOutlined,
   SlidersOutlined,
 } from "@ant-design/icons";
-
 import { useSelector } from "react-redux";
+import { useLocation, useHistory } from "react-router-dom";
+
 import { Issue } from "./components/Issue/Issue";
 import { Redeem } from "./components/Redeem/Redeem";
 import { Deposits } from "./components/Deposits/Deposits";
@@ -19,7 +18,7 @@ import { getParams } from "../../helpers/getParams";
 import { Parameters } from "./components/Parameters/Parameters";
 import { CapacitorIcon } from "../../components/CapacitorIcon/CapacitorIcon";
 import { GovernanceIcon } from "../../components/GovernanceIcon/GovernanceIcon";
-import { useParams, useLocation, useHistory } from "react-router-dom";
+
 const { TabPane } = Tabs;
 
 export const MainPage = () => {
@@ -54,16 +53,10 @@ export const MainPage = () => {
     if (location.hash && location.hash.slice(1) !== currentTab) {
       setCurrentTab(location.hash.slice(1));
     } else if (!location.hash) {
-      // history.replace({ hash: "buy" });
       setCurrentTab("buy");
     }
   }, []);
 
-  // useEffect(() => {
-  //   setCurrentTab("buy");
-  // }, [address, setCurrentTab]);
-
-  console.log("currentTab", currentTab);
   if (address === undefined || !loaded) {
     return null;
   } else if (

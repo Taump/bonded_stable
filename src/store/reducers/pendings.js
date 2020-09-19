@@ -1,4 +1,4 @@
-import { CHANGE_ACTIVE, ADD_EXCHANGE } from "../types";
+import { CHANGE_ACTIVE } from "../types";
 import { EVENT_PENDING_TOKEN } from "../types/events";
 import {
   PENDING_ISSUE_STABLECOIN,

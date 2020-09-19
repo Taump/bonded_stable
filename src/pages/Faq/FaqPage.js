@@ -12,7 +12,6 @@ export const FaqPage = () => {
 
   return (
     <div className="faq">
-      {/* <div className={styles.title}>f.a.q</div> */}
       <Title level={1}>F.A.Q.</Title>
       <Collapse
         accordion
@@ -253,7 +252,7 @@ export const FaqPage = () => {
           </p>
           <p>
             When you{" "}
-            <a href="/app/create" target="_blank" rel="noopener">
+            <a href="create" target="_blank" rel="noopener">
               create a new stablecoin
             </a>
             , you need to specify the desired leverage parameter. It is 0 by
@@ -282,7 +281,7 @@ export const FaqPage = () => {
           <p>
             If an oracle that posts the price of X already exists, you can
             create the{" "}
-            <a href="/app/create" target="_blank" rel="noopener">
+            <a href="create" target="_blank" rel="noopener">
               corresponding stablecoin
             </a>{" "}
             right away!

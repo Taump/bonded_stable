@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Select, Form, Table, Card, List } from "antd";
+
 import { ShowDecimalsValue } from "components/ShowDecimalsValue/ShowDecimalsValue";
 
 const { Option } = Select;
-export const SupportParams = ({
-  supportParamsByAddress,
-  governance,
-  decimals,
-  width,
-}) => {
+export const SupportParams = ({ supportParamsByAddress, decimals, width }) => {
   const [selectParam, setSelectParam] = useState(undefined);
 
   let source = [];
@@ -19,7 +15,6 @@ export const SupportParams = ({
       source.push({
         address,
         value: supportsParam[address].value,
-        // leader: governance[selectParam].leader,
         support: supportsParam[address].support,
       });
     }

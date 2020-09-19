@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect } from "react";
 import obyte from "obyte";
 import { message } from "antd";
@@ -36,7 +38,6 @@ export const HashHandler = ({ children }) => {
   }, [address]);
 
   useEffect(() => {
-    console.log(history.location.hash, "history");
     const splitUrl = history.location.pathname.split("/").slice(1);
     (async () => {
       if (

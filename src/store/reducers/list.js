@@ -1,5 +1,6 @@
 import { LOAD_LIST_SUCCESS, LOAD_LIST_REQUEST } from "../types";
 import { RESPONSE_ISSUE_STABLECOIN } from "../types/pendings";
+
 const initialState = {
   data: {},
   loading: false,

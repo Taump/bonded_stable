@@ -21,17 +21,8 @@ export const MainLayout = (props) => {
         style={{ background: "#fff", paddingLeft: width >= 1200 ? 50 : 20 }}
       >
         <Row justify={width < 840 ? "space-between" : undefined} align="middle">
-          <NavLink
-            to="/"
-            style={{
-              color: "#333333",
-              // paddingRight: 20,
-              fontWeight: "bold",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <img height="40px" src={logo} />
+          <NavLink to="/" className={styles.navLink}>
+            <img className={styles.logo} src={logo} alt="Bonded stablecoins" />
             <div style={{ paddingLeft: 10, paddingRight: 10 }}>
               <span>Bonded {width > 440 && "stablecoins"}</span>
               <sup style={{ fontSize: 8 }}>Beta</sup>

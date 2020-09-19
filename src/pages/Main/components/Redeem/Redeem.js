@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Typography } from "antd";
 import { useSelector } from "react-redux";
+
 import { RedeemToken } from "./forms/RedeemToken";
-import { getParams } from "../../../../helpers/getParams";
+import { getParams } from "helpers/getParams";
+
 const { Title } = Typography;
 
 export const Redeem = () => {

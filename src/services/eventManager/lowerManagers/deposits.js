@@ -1,5 +1,6 @@
-import { openNotification } from "utils/openNotification";
 import { isEmpty } from "lodash";
+
+import { openNotification } from "utils/openNotification";
 
 export const depositsEventManager = ({
   isReq,
@@ -56,8 +57,6 @@ export const depositsEventManager = ({
       for (const message in messages) {
         const msg = messages[message];
         if (msg.app === "payment" && "asset" in msg.payload) {
-          // const asset = msg.payload.asset;
-
           type = 1;
         }
       }

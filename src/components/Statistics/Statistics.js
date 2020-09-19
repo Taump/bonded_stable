@@ -26,7 +26,7 @@ export const Statistics = ({ windowWidth }) => {
   const actualParams = getParams(params, stable_state);
   const [timestamp, setTimestamp] = useState(Math.floor(Date.now() / 1000));
   const { supply1, supply2 } = stable_state;
-  const { decimals1, decimals2, reserve_asset, oracles } = actualParams;
+  const { decimals1, decimals2, reserve_asset } = actualParams;
   const { supply } = deposit_state;
 
   const target_p2 =

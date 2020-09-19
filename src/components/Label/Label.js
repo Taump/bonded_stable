@@ -1,9 +1,6 @@
 import React from "react";
 import { Tooltip } from "antd";
-import {
-  ExclamationCircleOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 export const Label = ({
   label,

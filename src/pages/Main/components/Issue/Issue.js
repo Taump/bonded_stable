@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Typography, Button, Checkbox, Row, Space } from "antd";
 import { useSelector } from "react-redux";
+
 import { validator } from "utils/validators";
 import { $get_exchange_result } from "helpers/bonded";
 import { generateLink } from "utils/generateLink";
 import { getParams } from "helpers/getParams";
 import config from "config";
+
 const { Title, Text } = Typography;
 const { useForm } = Form;
+
 export const Issue = () => {
   const {
     address,
@@ -17,7 +20,6 @@ export const Issue = () => {
     symbol1,
     symbol2,
     symbol3,
-    oracles,
     oracleValueReserve,
     oraclePrice,
   } = useSelector((state) => state.active);
@@ -28,7 +30,6 @@ export const Issue = () => {
   });
   const { activeWallet } = useSelector((state) => state.settings);
   const [form] = useForm();
-  const [fields, setFields] = useState([]);
   const [tokens1, setTokens1] = useState(undefined);
   const [tokens2, setTokens2] = useState(undefined);
   const [convert, setConvert] = useState(false);
@@ -36,12 +37,6 @@ export const Issue = () => {
 
   const reserve = stable_state.reserve;
   const [amount, setAmount] = useState(undefined);
-
-  // const isActiveIssue =
-  //   reserve !== undefined
-  //     ? (tokens1 !== "" && validFields.tokens1) ||
-  //       (tokens2 !== "" && validFields.tokens2)
-  //     : validFields.tokens1 && validFields.tokens2;
 
   let isActiveIssue = false;
 
@@ -59,7 +54,6 @@ export const Issue = () => {
       validFields.tokens1 &&
       Number(tokens2) &&
       validFields.tokens2;
-    console.log(4);
   }
 
   const validateValue = (params) =>
@@ -187,28 +181,9 @@ export const Issue = () => {
         </Text>
       </p>
       <Form
-        // fields={fields}
         form={form}
-        // onFieldsChange={(changedFields, allFields) => {
-        //   console.log("changedFields", changedFields);
-        //   if (changedFields.length > 0) {
-        //     const tokens1 = changedFields.find((t) => t.name === "tokens1");
-        //     const tokens2 = changedFields.find((t) => t.name === "tokens2");
-        //     if (tokens1) {
-        //       if (f(tokens1.value) <= 3) {
-        //         setFields(allFields);
-        //       }
-        //     }
-        //     if (tokens2) {
-        //       if (f(tokens2.value) <= 3) {
-        //         setFields(allFields);
-        //       }
-        //     }
-        //   }
-        // }}
         onValuesChange={(value, store) => {
           if ("tokens1" in value) {
-            console.log("test", f(value.tokens1));
             if (f(value.tokens1) <= actualParams.decimals1) {
               setTokens1(value.tokens1);
             }

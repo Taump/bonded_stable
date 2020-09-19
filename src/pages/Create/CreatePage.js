@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Steps } from "antd";
+
 import { useWindowSize } from "hooks/useWindowSize";
 import { CurverStep } from "./components/CurveStep/CurveStep";
 import { CapacitorStep } from "./components/CapacitorStep/CapacitorStep";

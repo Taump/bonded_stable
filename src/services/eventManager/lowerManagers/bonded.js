@@ -3,12 +3,9 @@ import { isEmpty } from "lodash";
 
 export const bondedEventManager = ({
   isReq,
-  response,
-  isRes,
   payload,
   isAuthor,
   messages,
-  type,
   asset1,
   asset2,
 }) => {

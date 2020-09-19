@@ -3,9 +3,7 @@ import { Button, Form, Input, Modal, Space, Select, Divider } from "antd";
 import obyte from "obyte";
 
 import { generateLink } from "utils/generateLink";
-import { redirect } from "utils/redirect";
 import config from "config";
-import { PlusOutlined } from "@ant-design/icons";
 
 export const EditRecipientModal = ({
   visible,
@@ -31,7 +29,7 @@ export const EditRecipientModal = ({
     ) {
       setSelectAddress(current);
     }
-  }, [visible, current, setSelectAddress]);
+  }, [visible, current, setSelectAddress]); // eslint-disable-line
 
   const handleChange = (ev) => {
     const value = ev.target.value;
@@ -41,15 +39,6 @@ export const EditRecipientModal = ({
       setAddress({ value: value, valid: false });
     }
   };
-
-  let validateStatus = "";
-  if (address.valid === true) {
-    validateStatus = "success";
-  } else if (address.valid === false) {
-    validateStatus = "error";
-  } else {
-    validateStatus = "";
-  }
 
   const handleCancel = () => {
     setShowWalletModal(false);

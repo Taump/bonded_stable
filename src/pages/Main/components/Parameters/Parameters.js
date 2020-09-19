@@ -5,11 +5,11 @@ import { Typography } from "antd";
 import { CurveParameters } from "./components/CurveParameters";
 import { CapacitorParameters } from "./components/CapacitorParameters";
 import { GovernanceParameters } from "./components/GovernanceParameters";
+import { AutonomusParameters } from "./components/AutonomusParameters";
+import { TokensParameters } from "./components/TokensParameters";
 import styles from "./Parameters.module.css";
 import { getParams } from "helpers/getParams";
 import config from "config";
-import { AutonomusParameters } from "./components/AutonomusParameters";
-import { TokensParameters } from "./components/TokensParameters";
 
 const { Title } = Typography;
 

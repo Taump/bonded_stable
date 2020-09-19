@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Form, Col, Row, Select, Input, message, Button, Space } from "antd";
+import moment from "moment";
+
 import client from "services/socket";
 import { generateLink } from "utils/generateLink";
-import moment from "moment";
 
 export const ChangeOracles = ({
   activeWallet,
@@ -246,7 +247,7 @@ export const ChangeOracles = ({
         </Col>
       </Row>
       <Row>
-        <Form.Item name="amount">
+        <Form.Item>
           <Input
             placeholder="Amount support"
             suffix={symbol || "Tokens1"}

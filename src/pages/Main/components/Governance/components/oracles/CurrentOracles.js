@@ -4,7 +4,7 @@ import { Col, Row } from "antd";
 export const CurrentOracles = ({ param, oracles }) => {
   const OracleList = [];
   if (oracles) {
-    oracles.map((o, i) => {
+    oracles.forEach((o, i) => {
       OracleList.push(
         <Col flex={1} style={{ marginBottom: 5 }} key={o.oracle + i}>
           <div>

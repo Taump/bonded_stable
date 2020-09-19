@@ -1,7 +1,9 @@
 import React from "react";
 import { Statistic, Button } from "antd";
-import { generateLink } from "utils/generateLink";
 import moment from "moment";
+
+import { generateLink } from "utils/generateLink";
+
 const { Countdown } = Statistic;
 
 export const InfoOracle = ({

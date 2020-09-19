@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import config from "config";
 import axios from "axios";
+
 import { popularCurrency } from "../popularCurrencty";
+
 export const useGetCurrency = () => {
   const [currencies, setCurrencies] = useState([]);
   useEffect(() => {

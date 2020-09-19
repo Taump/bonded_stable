@@ -5,4 +5,3 @@ export const pendingIssue = (params) => ({
   type: PENDING_ISSUE_STABLECOIN,
   payload: pickBy(params, (p) => p !== undefined),
 });
-// const cleanedObject = pickBy(originalObject, v => v !== undefined)

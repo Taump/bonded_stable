@@ -11,11 +11,9 @@ const { Text, Paragraph } = Typography;
 
 export const ExchangeView = ({ current }) => {
   const dispatch = useDispatch();
-
   const [status, setStatus] = useState(undefined);
 
   const {
-    id,
     address,
     address_from,
     amount_token,

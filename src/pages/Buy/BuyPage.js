@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography } from "antd";
 import { useSelector } from "react-redux";
+
 import { ExchangeForm } from "./components/ExchangeForm";
 import { ExchangeList } from "./components/ExchangeList";
 import { ExchangeView } from "./components/ExchangeView";
@@ -13,7 +14,7 @@ export const BuyPage = () => {
   );
   const current = exchanges.find((p) => p.id === pendingExchanges);
   useEffect(() => {
-    document.title = "Bonded stablecoins - Buy tokens interest tokens";
+    document.title = "Bonded stablecoins - Buy interest tokens";
   }, []);
   return (
     <div>

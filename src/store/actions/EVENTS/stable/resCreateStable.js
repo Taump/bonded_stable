@@ -1,6 +1,7 @@
+import { Modal } from "antd";
+
 import { RESPONSE_ISSUE_STABLECOIN } from "../../../types/pendings";
 import { changeActive } from "../../active/changeActive";
-import { Modal } from "antd";
 import { resetIssueStablecoin } from "../../pendings/resetIssueStablecoin";
 import history from "historyInstance.js";
 /* eslint eqeqeq: "off" */

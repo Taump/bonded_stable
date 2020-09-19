@@ -1,6 +1,10 @@
 import socket from "services/socket";
 
-export const getOraclePrice = async (stable_state, params) => {
+export const getOraclePrice = async (
+  stable_state,
+  params,
+  showOracles = false
+) => {
   let oracleValue1, oracleValue2, oracleValue3;
   if ("oracles" in stable_state) {
     const { oracles } = stable_state;
@@ -62,9 +66,15 @@ export const getOraclePrice = async (stable_state, params) => {
     (v) => !!v
   );
 
-  return oraclesValues.reduce((result, current, index) => {
+  const price = oraclesValues.reduce((result, current, index) => {
     return params["op" + index + 1] === "/"
       ? result / current
       : result * (current || 1);
   }, 1);
+
+  if (showOracles) {
+    return [price, oracleValue1, oracleValue2, oracleValue3];
+  } else {
+    return price;
+  }
 };

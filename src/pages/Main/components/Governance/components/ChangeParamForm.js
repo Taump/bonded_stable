@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Select, Form, Input, Typography } from "antd";
+import { Row, Col, Button, Select, Form, Input } from "antd";
 import { generateLink } from "utils/generateLink";
 
 const { Option } = Select;
-const { Title, Text } = Typography;
 
 export const ChangeParamForm = ({
   asset,

@@ -1,22 +1,11 @@
 import React from "react";
 import { Label } from "components/Label/Label";
 import styles from "../Parameters.module.css";
-import config from "config";
-
 export const CurveParameters = ({
   params,
-  asset,
-  asset1,
-  asset2,
   oracleValue1,
   oracleValue2,
   oracleValue3,
-  symbol1,
-  symbol2,
-  symbol3,
-  curve_aa,
-  governance_aa,
-  deposit_aa,
 }) => {
   const {
     oracle1,

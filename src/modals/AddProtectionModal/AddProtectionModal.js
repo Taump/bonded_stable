@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal, Form, Input, Space, Button } from "antd";
 import { generateLink } from "utils/generateLink";
-import config from "../../config";
+import config from "config";
 import { useSelector } from "react-redux";
 
 export const AddProtectionModal = ({
@@ -15,11 +15,12 @@ export const AddProtectionModal = ({
     value: undefined,
     valid: undefined,
   });
+  const amountInputRef = useRef(null);
+  const addBtnRef = useRef(null);
+
   const { id } = deposit;
   const { reserve_asset, reserve_asset_decimals } = params;
 
-  const amountInputRef = useRef(null);
-  const addBtnRef = useRef(null);
   const handleChangeAmount = (ev) => {
     const value = ev.target.value;
     const reg = /^[0-9.]+$/;
@@ -46,7 +47,6 @@ export const AddProtectionModal = ({
       amountInputRef.current.focus();
     }
   }, [visible]);
-  console.log("reserve_asset_desimals", reserve_asset_decimals);
   return (
     <Modal
       visible={visible}

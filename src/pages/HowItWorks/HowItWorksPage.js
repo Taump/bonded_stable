@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
+import { Typography } from "antd";
+
 import graphics from "./img/graphics.svg";
 import capacitor from "./img/capacitor.svg";
 import agent from "./img/agent.svg";
 import styles from "./HowItWorksPage.module.css";
-import { MainLayout } from "components/MainLayout/MainLayout";
-import { Typography } from "antd";
+
 const { Title } = Typography;
+
 export const HowItWorksPage = () => {
   useEffect(() => {
     document.title = "Bonded stablecoins - How it works";
   }, []);
+
   return (
     <div>
       <div className={styles.howItWork}>
-        {/* <div className={styles.title}>How it works</div> */}
         <Title level={1}>How it works</Title>
         <div className={styles.subTitle}>
           There is some math behind all this. IUSD and GRD tokens exist on a
@@ -112,12 +114,6 @@ export const HowItWorksPage = () => {
             Read a more thorough introduction to bonded stablecoins in{" "}
             <a href="#">our blog</a>.
           </div>
-
-          {/* <div className={styles.button}>
-          <a href="/app" target="_blank" rel="noopener">
-            Open app
-          </a>
-        </div> */}
         </div>
       </div>
     </div>

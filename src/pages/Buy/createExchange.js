@@ -1,8 +1,9 @@
 import { store } from "index";
-import { addExchange } from "store/actions/settings/addExchange";
 import axios from "axios";
 import config from "config";
-import { addExchangePending } from "../../store/actions/settings/addExchangePending";
+
+import { addExchange } from "store/actions/settings/addExchange";
+import { addExchangePending } from "store/actions/settings/addExchangePending";
 
 export const createExchange = async ({
   address,
@@ -14,10 +15,11 @@ export const createExchange = async ({
   currency_from,
   recipient,
   curve_address,
-  rate,
 }) => {
   const { data } = await axios.get(
-    `https://testnet.ostable.org/api/create_buffer?address=${recipient.value}&curve_aa=${curve_address}`
+    `https://${config.TESTNET ? "testnet." : ""}${
+      config.BUFFER_URL
+    }/create_buffer?address=${recipient.value}&curve_aa=${curve_address}`
   );
   const { buffer_address } = data.data;
   const create = await axios.post(
@@ -38,7 +40,9 @@ export const createExchange = async ({
   if (create && create.data) {
     const isError = await axios
       .post(
-        `https://testnet.ostable.org/api/create_order`,
+        `https://${config.TESTNET ? "testnet." : ""}${
+          config.BUFFER_URL
+        }/create_order`,
         {
           provider: "simpleswap",
           provider_id: create.data.id,

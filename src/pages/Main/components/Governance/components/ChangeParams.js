@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Table, Button, Space, Statistic, Card, List } from "antd";
 import moment from "moment";
+
 import { generateLink } from "utils/generateLink";
 import { ChangeParamsModal } from "modals/ChangeParamsModal/ChangeParamsModal";
 
 const { Countdown } = Statistic;
 
 export const ChangeParams = ({
-  supportedParams,
   asset,
   activeWallet,
   governance,

@@ -3,7 +3,6 @@ import { Table, Button, Space, List, Typography, Tooltip } from "antd";
 import {
   PlusOutlined,
   EditOutlined,
-  ImportOutlined,
   ExportOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
@@ -104,14 +103,12 @@ export const Deposits = () => {
       dataIndex: "protection",
       key: "id",
       render: (value, records) => {
-        // if (!value) return "-";
         const protection = value
           ? (value / 10 ** actualParams.reserve_asset_decimals).toFixed(
               actualParams.reserve_asset_decimals
             )
           : 0;
         const ratio = Number((value || 0) / records.amount).toFixed(2);
-        // return `${protection} (${ratio})`;
 
         return (
           <>
@@ -183,7 +180,6 @@ export const Deposits = () => {
                   records.close_interest
                 }
                 icon={<ExportOutlined />}
-                // style={{ marginLeft: 5, marginRight: 5 }}
               />
             </Tooltip>
           </>
@@ -232,8 +228,6 @@ export const Deposits = () => {
     {
       witdh: "5%",
       render: (_, records) => {
-        // const new_stable_amount = Math.floor(records.amount * growth_factor);
-        // const interest = new_stable_amount - records.stable_amount;
         const closeUrl = generateLink(
           records.stable_amount,
           { id: records.id },
@@ -382,7 +376,6 @@ export const Deposits = () => {
               setVisibleEditRecipient={setVisibleEditRecipient}
               setAddProtection={setAddProtection}
               setWithdrawProtection={setWithdrawProtection}
-              //  ДОБАВИТЬ WithDraw
             />
           )}
         />

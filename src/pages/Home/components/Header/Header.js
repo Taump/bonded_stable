@@ -4,7 +4,6 @@ import { Select } from "antd";
 import { InterestToken } from "./components/InterestToken";
 import { StableToken } from "./components/StableToken";
 import { GrowthToken } from "./components/GrowthToken";
-import logo from "./img/logo2.svg";
 import config from "config";
 import { Link } from "react-router-dom";
 
@@ -17,16 +16,7 @@ export const Header = ({ type, setType }) => {
   return (
     <>
       <header className={styles.header}>
-        {/* <div className={styles.button}>
-          <a target="_blank" rel="noopener" href="/app">
-            Open app
-          </a>
-        </div> */}
-
         <div className={styles.titleWrap}>
-          {/* <div className={styles.logo}>
-            <img alt="Bonded stablecoins" src={logo} />
-          </div> */}
           <h1 className={styles.title}>Bonded stablecoins</h1>
           <h2 className={styles.subTitle}>Choose your crypto:</h2>
         </div>

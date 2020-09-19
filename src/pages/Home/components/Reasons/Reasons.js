@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./Reasons.module.css";
 
 export const Reasons = () => (

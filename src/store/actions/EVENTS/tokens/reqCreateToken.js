@@ -1,4 +1,4 @@
-import config from "../../../../config";
+import config from "config";
 import { EVENT_PENDING_TOKEN } from "../../../types/events";
 
 export const reqCreateToken = ({ symbol, asset, type, isAuthor }) => async (

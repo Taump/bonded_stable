@@ -4,7 +4,7 @@ import {
   LOAD_LIST_SUCCESS,
 } from "../../types";
 import config from "config";
-import { getParams } from "../../../helpers/getParams";
+import { getParams } from "helpers/getParams";
 
 export const getList = () => async (dispatch, getState, socket) => {
   const list = {};
@@ -67,7 +67,7 @@ export const getList = () => async (dispatch, getState, socket) => {
 
   const getStateVarsAas = [];
   await Promise.all(getStablesParams).then((result) => {
-    result.map((res) => {
+    result.forEach((res) => {
       getStateVarsAas.push(
         socket.api.getAaStateVars({ address: res.address }).then((state) => {
           list[res.address].params = getParams(list[res.address].params, state);

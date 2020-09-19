@@ -12,8 +12,7 @@ import {
 import obyte from "obyte";
 import { generateLink } from "utils/generateLink";
 import { redirect } from "utils/redirect";
-import { getStatusVaild } from "utils/getStatusVaild";
-import config from "../../config";
+import config from "config";
 
 const { Text } = Typography;
 
@@ -158,29 +157,13 @@ export const OpenDepositModal = ({
             }}
           />
         </Form.Item>
-        {/* <Form.Item
-          hasFeedback={true}
-          validateStatus={
-            interestRecipient.value !== ""
-              ? getStatusVaild(interestRecipient.valid)
-              : undefined
-          }
-        >
-          <Input
-            placeholder="Address of the interest recipient if other than yourself"
-            onChange={handleChangeRecipient}
-            value={interestRecipient.value}
-          />
-        </Form.Item> */}
 
         <Form.Item>
           <Select
             placeholder="Select interest recepient"
             value={selectAddress}
-            onChange={(value, option) => {
-              // setAddress({ value, valid: value !== "" });
+            onChange={(value) => {
               setSelectAddress(value);
-              console.log("option", option);
             }}
             dropdownRender={(menu) => (
               <div>

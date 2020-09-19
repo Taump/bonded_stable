@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "antd";
-import { WithdrawModal } from "modals/WithdrawModal/WithdrawModal";
 import { useSelector } from "react-redux";
+
+import { WithdrawModal } from "modals/WithdrawModal/WithdrawModal";
 
 export const Withdraw = ({ choiceParams, balance, symbol }) => {
   const [visible, setVisible] = useState(false);

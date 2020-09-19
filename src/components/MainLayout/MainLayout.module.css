@@ -1,7 +1,13 @@
-.content {
-  /* padding: 30px 50px; */
+.navLink {
+  color: #333333;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
+.logo {
+  height: 40px;
+}
 @media (max-width: 1200px) {
   .content {
     padding: 15px 10px;

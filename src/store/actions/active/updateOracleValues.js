@@ -1,7 +1,7 @@
 import { UPDATE_ORACLES } from "../../types/active";
 import { getOraclePrice } from "helpers/getOraclePrice";
 
-export const updateOracleValues = () => async (dispatch, getState, socket) => {
+export const updateOracleValues = () => async (dispatch, getState) => {
   const store = getState();
   const { active } = store;
   const { stable_state, params } = active;

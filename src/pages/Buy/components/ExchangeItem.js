@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
-import { addExchangePending } from "../../../store/actions/settings/addExchangePending";
+import { addExchangePending } from "store/actions/settings/addExchangePending";
 
 export const ExchangeItem = ({ parametrs, status }) => {
   const {
@@ -15,7 +15,6 @@ export const ExchangeItem = ({ parametrs, status }) => {
     asset,
   } = parametrs;
 
-  console.log("parametrs", parametrs);
   const dispatch = useDispatch();
   return (
     <Card

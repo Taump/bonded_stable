@@ -12,12 +12,13 @@ import {
 } from "antd";
 import { ArrowRightOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import Decimal from "decimal.js";
+import obyte from "obyte";
+
 import { $get_exchange_result } from "helpers/bonded";
 import { getOraclePrice } from "helpers/getOraclePrice";
 import { generateLink } from "utils/generateLink";
-import Decimal from "decimal.js";
-
-import obyte from "obyte";
 import { addExchangeRecepient } from "store/actions/settings/addExchangeRecepient";
 import { useGetCurrency } from "../hooks/useGetCurrency";
 import { useGetRanges } from "../hooks/useGetRanges";
@@ -26,7 +27,6 @@ import { getTokens } from "../selectors/getTokens";
 import { useGetRate } from "../hooks/useGetRate";
 import { useWindowSize } from "hooks/useWindowSize";
 import { popularCurrency } from "../popularCurrencty";
-import { Link } from "react-router-dom";
 import { useGetCompensation } from "../hooks/useGetCompensation";
 import { updateExchangesForm } from "store/actions/settings/updateExchangesForm";
 
@@ -270,7 +270,6 @@ export const ExchangeForm = () => {
                 ranges && ranges.min ? "Min. " + ranges.min : ""
               }  ${ranges && ranges.max ? " Max. " + ranges.max : ""}`}
               onChange={handleAmountCurrency}
-              // value={amountCurrency || undefined}
               value={isNaN(amountCurrency) ? undefined : amountCurrency}
               disabled={activeCurrency === "gbyte" || isCreated}
               onKeyPress={(ev) => {

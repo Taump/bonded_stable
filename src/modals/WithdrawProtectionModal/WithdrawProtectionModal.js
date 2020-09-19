@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal, Form, Input, Space, Button, Typography } from "antd";
+import { useSelector } from "react-redux";
 import { generateLink } from "utils/generateLink";
 import config from "config";
-import { useSelector } from "react-redux";
+
 const { Text } = Typography;
 
 export const WithdrawProtectionModal = ({
@@ -47,7 +48,7 @@ export const WithdrawProtectionModal = ({
       amountInput.current.focus();
     }
   }, [visible]);
-  console.log("protection", protection);
+
   return (
     <Modal
       visible={visible}

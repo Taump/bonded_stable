@@ -91,8 +91,8 @@ export const Capacitors = ({ stable_state, address, params }) => {
           <Text type="secondary">
             The capacity can be moved from the slow to the fast pool if the
             price goes off-peg by more than {params.threshold_distance * 100}%
-            and stays there for more than{" "}
-            {hours !== 0 && hours + " " + "hours and "} {minutes + " minutes"}.
+            and stays there for more than {hours !== 0 && hours + " hours and "}{" "}
+            {minutes + " minutes"}.
           </Text>
         </p>
         <Button type="primary" href={link} disabled={!isExpiry}>

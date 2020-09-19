@@ -88,7 +88,6 @@ export const $get_exchange_result = ({
   oracle_price,
   timestamp,
   oracleValueReserve,
-  send_reserve,
 }) => {
   let {
     growth_factor,
@@ -106,7 +105,6 @@ export const $get_exchange_result = ({
     decimals1,
     decimals2,
     reserve_asset_decimals,
-    reserve_asset,
     m,
     n,
     fee_multiplier,

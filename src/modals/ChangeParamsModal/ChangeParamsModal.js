@@ -68,7 +68,7 @@ export const ChangeParamsModal = ({
       value: undefined,
       valid: false,
     });
-  }, [visible]);
+  }, [visible]); // eslint-disable-line
 
   const valueInput = useRef(null);
 

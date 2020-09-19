@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "components/Label/Label";
+
 import styles from "../Parameters.module.css";
 import config from "config";
 

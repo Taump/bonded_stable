@@ -184,11 +184,7 @@ export const RegisterSymbols = (props) => {
           </Text>
         </p>
       )}
-      <Form
-        // form={form}
-        size="large"
-        style={{ marginTop: 35 }}
-      >
+      <Form size="large" style={{ marginTop: 35 }}>
         <Form.Item
           hasFeedback
           extra={helpSymbol}
@@ -230,9 +226,6 @@ export const RegisterSymbols = (props) => {
                 rows={5}
                 value={descr.value}
                 onChange={handleChangeDescr}
-                // disabled={pendingCheck}
-                // value={descr ? descr.value : undefined}
-                // onChange={handleChangeDescr}
                 placeholder="Description of an asset (up to 140 characters)"
               />
             </Form.Item>
@@ -265,10 +258,6 @@ export const RegisterSymbols = (props) => {
                   : "Register anyway"}
               </Button>
             )}
-
-            {/* {currentStep !== 2 && (
-              <Button onClick={() => setCurrentStep((s) => s + 1)}>Next</Button>
-            )} */}
             <Button
               type="link"
               danger

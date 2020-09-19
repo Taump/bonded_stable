@@ -5,6 +5,7 @@ import {
   CHANGE_DEPOSIT_STATE,
   CHANGE_GOVERNANCE_STATE,
 } from "../types/state";
+
 const initialState = {
   address: undefined,
   deposit_aa: undefined,
@@ -39,6 +40,9 @@ export const activeReducer = (state = initialState, action) => {
         symbol3: action.payload.symbol3,
         oracleValueReserve: action.payload.oracleValueReserve,
         oraclePrice: action.payload.oraclePrice,
+        oracleValue1: action.payload.oracleValue1,
+        oracleValue2: action.payload.oracleValue2,
+        oracleValue3: action.payload.oracleValue3,
       };
     }
     case EVENT_CREATE_TOKEN: {
