@@ -10,6 +10,7 @@ import {
   Spin,
   Form,
 } from "antd";
+import ReactGA from "react-ga";
 import { ArrowRightOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -230,7 +231,10 @@ export const ExchangeForm = () => {
         } else {
           message.error("An error occurred, please try again later");
         }
-
+        ReactGA.event({
+          category: "Stablecoin",
+          action: "Buy interest tokens for currency",
+        });
         setAmountCurrency(undefined);
         setAmountToken(undefined);
         setIsCreated(false);
@@ -505,6 +509,12 @@ export const ExchangeForm = () => {
                 !amountCurrency ||
                 amountCurrency === "" ||
                 Number(amountCurrency) === 0
+              }
+              onClick={() =>
+                ReactGA.event({
+                  category: "Stablecoin",
+                  action: "Buy interest tokens for gbyte",
+                })
               }
               ref={buyForGbyteRef}
               href={

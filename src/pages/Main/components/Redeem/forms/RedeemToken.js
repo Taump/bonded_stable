@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form, Input, Button, Typography } from "antd";
+import ReactGA from "react-ga";
 
 import { validator } from "utils/validators";
 import { generateLink } from "utils/generateLink";
@@ -102,6 +103,7 @@ export const RedeemToken = ({
           (1 / exchange.target_p2)) *
         100
       : 0;
+
   return (
     <Form
       form={form}
@@ -137,16 +139,20 @@ export const RedeemToken = ({
               }
             }
           }}
+          onSearch={() => {
+            ReactGA.event({
+              category: "Stablecoin",
+              action: "Redeem token" + type,
+            });
+            setTimeout(() => {
+              resetFields();
+              setExchange(null);
+            }, 100);
+          }}
           enterButton={
             <Button
               type="primary"
               ref={buttonRef}
-              onClick={() =>
-                setTimeout(() => {
-                  resetFields();
-                  setExchange(null);
-                }, 100)
-              }
               disabled={
                 !valid || exchange === null || (exchange && exchange.payout < 0)
               }
@@ -194,7 +200,7 @@ export const RedeemToken = ({
           </Text>
         </div>
       ) : (
-        <div></div>
+        <div />
       )}
     </Form>
   );

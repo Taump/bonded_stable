@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import ReactGA from "react-ga";
 
 import { generateLink } from "utils/generateLink";
 import { $get_growth_factor } from "helpers/bonded.js";
@@ -241,6 +242,12 @@ export const Deposits = () => {
               type="link"
               size="small"
               href={closeUrl}
+              onClick={() => {
+                ReactGA.event({
+                  category: "Stablecoin",
+                  action: "Close deposit",
+                });
+              }}
               disabled={
                 records.owner !== activeWallet ||
                 records.ts + 2 * 3600 > timestamp ||

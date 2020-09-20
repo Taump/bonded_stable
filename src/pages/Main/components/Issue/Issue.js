@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Typography, Button, Checkbox, Row, Space } from "antd";
 import { useSelector } from "react-redux";
+import ReactGA from "react-ga";
 
 import { validator } from "utils/validators";
 import { $get_exchange_result } from "helpers/bonded";
@@ -345,6 +346,12 @@ export const Issue = () => {
               <Button
                 type="primary"
                 href={link}
+                onClick={() => {
+                  ReactGA.event({
+                    category: "Stablecoin",
+                    action: "Issue",
+                  });
+                }}
                 // onClick={() => setTimeout(() => clearForm(), 100)}
                 disabled={
                   ((Number(tokens1) === 0 || tokens1 === undefined) &&

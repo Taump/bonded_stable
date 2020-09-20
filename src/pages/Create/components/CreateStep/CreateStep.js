@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Result } from "antd";
 import { WalletOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
+import ReactGA from "react-ga";
 
 import { generateLink } from "utils/generateLink";
 import { pendingIssue } from "store/actions/pendings/pendingIssue";
@@ -54,7 +55,17 @@ export const CreateStep = ({ data, setCurrent }) => {
       title="Almost ready!"
       subTitle="Please click the «Create» button below, this will open your Obyte wallet and you'll send a transaction that will create the new stablecoin."
       extra={[
-        <Button href={link} type="primary" key="CreateStep-create">
+        <Button
+          href={link}
+          type="primary"
+          key="CreateStep-create"
+          onClick={() => {
+            ReactGA.event({
+              category: "Stablecoin",
+              action: "Create stablecoin",
+            });
+          }}
+        >
           Create
         </Button>,
         <Button

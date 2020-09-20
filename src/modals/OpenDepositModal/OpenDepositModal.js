@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactGA from "react-ga";
 import {
   Button,
   Form,
@@ -130,6 +131,10 @@ export const OpenDepositModal = ({
             onClick={() =>
               setTimeout(() => {
                 handleCancel();
+                ReactGA.event({
+                  category: "Stablecoin",
+                  action: "Open deposit",
+                });
               }, 100)
             }
           >
