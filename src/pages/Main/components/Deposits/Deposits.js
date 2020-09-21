@@ -196,14 +196,14 @@ export const Deposits = () => {
       ),
       dataIndex: "interest_recipient",
       render: (value, records) => {
-        const recepientName =
-          value && config.interestRecepients.find((a) => a.address === value);
+        const recipientName =
+          value && config.interestRecipients.find((a) => a.address === value);
         return (
           <>
             {!value || activeWallet === value
               ? "you"
-              : (recepientName && (
-                  <span style={{ fontSize: 12 }}>{recepientName.name}</span>
+              : (recipientName && (
+                  <span style={{ fontSize: 12 }}>{recipientName.name}</span>
                 )) ||
                 value.slice(0, 9) + "..."}
 
@@ -227,7 +227,6 @@ export const Deposits = () => {
       },
     },
     {
-      witdh: "5%",
       render: (_, records) => {
         const closeUrl = generateLink(
           records.stable_amount,

@@ -91,21 +91,21 @@ export const Statistics = ({ windowWidth }) => {
   const statisticsData = [
     {
       title: "Tokens1 supply",
-      currency: symbol1 && symbol1,
+      currency: symbol1,
       descr: "Total supply of Token1 (growth tokens)",
       value: supply1 || 0,
       decimals: decimals1,
     },
     {
       title: "Tokens2 supply",
-      currency: symbol2 && symbol2,
+      currency: symbol2,
       descr: "Total supply of Token2 (interest token)",
       value: supply2 || 0,
       decimals: decimals2,
     },
     {
       title: "Stable tokens supply",
-      currency: symbol3 && symbol3,
+      currency: symbol3,
       descr: "Total supply of the stable tokens",
       value: supply || 0,
       decimals: decimals1,

@@ -16,11 +16,11 @@ export const SelectStablecoin = () => {
   for (const stable in data) {
     const { feed_name, interest_rate } = data[stable].params;
     const { asset_2, symbol } = data[stable];
-    const interest_rate_per = Decimal.mul(interest_rate, 100).toNumber();
+    const interest_rate_percent = Decimal.mul(interest_rate, 100).toNumber();
     if (!recentList.includes(stable)) {
       optionList.push(
         <Select.Option value={stable} key={stable}>
-          {feed_name} {String(interest_rate_per)}% : {symbol || asset_2} (
+          {feed_name} {String(interest_rate_percent)}% : {symbol || asset_2} (
           {stable})
         </Select.Option>
       );
@@ -30,10 +30,11 @@ export const SelectStablecoin = () => {
   const optionListRecent = recentList.map((adr) => {
     const { feed_name, interest_rate } = data[adr].params;
     const { asset_2, symbol } = data[adr];
-    const interest_rate_per = Decimal.mul(interest_rate, 100).toNumber();
+    const interest_rate_percent = Decimal.mul(interest_rate, 100).toNumber();
     return (
       <Select.Option value={adr} key={adr}>
-        {feed_name} {String(interest_rate_per)}% : {symbol || asset_2} ({adr})
+        {feed_name} {String(interest_rate_percent)}% : {symbol || asset_2} (
+        {adr})
       </Select.Option>
     );
   });

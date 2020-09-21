@@ -21,7 +21,7 @@ export const Issue = () => {
     symbol1,
     symbol2,
     symbol3,
-    oracleValueReserve,
+    reservePrice,
     oraclePrice,
   } = useSelector((state) => state.active);
 
@@ -75,7 +75,7 @@ export const Issue = () => {
       vars: stable_state,
       oracle_price: oraclePrice,
       timestamp: Math.floor(Date.now() / 1000),
-      oracleValueReserve,
+      reservePrice,
     });
 
     if (enableHelp || !reserve) {
@@ -103,7 +103,7 @@ export const Issue = () => {
     oraclePrice,
     params,
     stable_state,
-    oracleValueReserve,
+    reservePrice,
   ]);
 
   let link = "";
@@ -111,7 +111,7 @@ export const Issue = () => {
     link =
       amount !== undefined && amount.reserve_needed !== undefined
         ? generateLink(
-            Math.ceil(amount.reserve_needed * 1.001 + 1000),
+            Math.ceil(amount.reserve_needed * 1.01 + 1000),
             {
               tokens1:
                 Number(tokens1).toFixed(params.decimals1) *
@@ -135,8 +135,8 @@ export const Issue = () => {
 
   const priceChange =
     amount !== undefined && 1 / amount.p2 - (1 / stable_state.p2 || 0);
-  const changePriceProcent = (priceChange / (1 / stable_state.p2) || 0) * 100;
-  const changeFinalPriceProcent =
+  const changePricePercent = (priceChange / (1 / stable_state.p2) || 0) * 100;
+  const changeFinalPricePercent =
     amount !== undefined
       ? ((1 / amount.p2 - 1 / amount.target_p2) / (1 / amount.target_p2)) * 100
       : 0;
@@ -221,9 +221,9 @@ export const Issue = () => {
               <span style={{ color: "#ccc" }}>
                 {amount !== undefined &&
                   "≈ " +
-                    amount.s1p.toFixed(2) +
+                    amount.amountTokens1InCurrency.toFixed(2) +
                     " " +
-                    (oracleValueReserve
+                    (reservePrice
                       ? config.reserves[actualParams.reserve_asset].feedCurrency
                       : config.reserves[actualParams.reserve_asset].name)}
               </span>
@@ -250,9 +250,9 @@ export const Issue = () => {
               <span style={{ color: "#ccc" }}>
                 {amount !== undefined &&
                   "≈ " +
-                    amount.s2p.toFixed(2) +
+                    amount.amountTokens2InCurrency.toFixed(2) +
                     " " +
-                    (oracleValueReserve
+                    (reservePrice
                       ? config.reserves[actualParams.reserve_asset].feedCurrency
                       : config.reserves[actualParams.reserve_asset].name)}
               </span>
@@ -309,8 +309,8 @@ export const Issue = () => {
                   {priceChange.toFixed(4)}
                   {"p2" in stable_state &&
                     " (" +
-                      (changePriceProcent > 0 ? "+" : "") +
-                      changePriceProcent.toFixed(2) +
+                      (changePricePercent > 0 ? "+" : "") +
+                      changePricePercent.toFixed(2) +
                       "%)"}
                 </>
               ) : (
@@ -330,8 +330,8 @@ export const Issue = () => {
                 Number(1 / amount.p2).toFixed(
                   actualParams.reserve_asset_decimals
                 ) +
-                  ` (${Math.abs(changeFinalPriceProcent).toFixed(2)}% ${
-                    changeFinalPriceProcent > 0 ? "above" : "below"
+                  ` (${Math.abs(changeFinalPricePercent).toFixed(2)}% ${
+                    changeFinalPricePercent > 0 ? "above" : "below"
                   } the target)`) ||
                 "-"}
             </Text>
@@ -352,7 +352,6 @@ export const Issue = () => {
                     action: "Issue",
                   });
                 }}
-                // onClick={() => setTimeout(() => clearForm(), 100)}
                 disabled={
                   ((Number(tokens1) === 0 || tokens1 === undefined) &&
                     (Number(tokens2) === 0 || tokens2 === undefined)) ||
@@ -368,10 +367,10 @@ export const Issue = () => {
                   ? " GB"
                   : params.reserve_asset.slice(0, 4)}
               </Button>
-              {isActiveIssue && oracleValueReserve && (
+              {isActiveIssue && reservePrice && (
                 <div>
                   ≈ {amount.reserve_needed_in_сurrency.toFixed(2)}{" "}
-                  {oracleValueReserve
+                  {reservePrice
                     ? config.reserves[actualParams.reserve_asset].feedCurrency
                     : config.reserves[actualParams.reserve_asset].name}
                 </div>

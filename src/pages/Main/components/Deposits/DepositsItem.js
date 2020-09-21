@@ -44,7 +44,7 @@ export const DepositsItem = ({
   const protectionRatio = Number((protection || 0) / amount).toFixed(2);
   const recepientName =
     interest_recipient &&
-    config.interestRecepients.find((a) => a.address === interest_recipient);
+    config.interestRecipients.find((a) => a.address === interest_recipient);
   return (
     <Card
       style={{ marginBottom: 10, wordBreak: "break-all" }}

@@ -11,7 +11,7 @@ import { depositsEventManager } from "./lowerManagers/deposits";
 import { openNotification } from "utils/openNotification";
 import { reqIssueStablecoin } from "store/actions/pendings/reqIssueStablecoin";
 import { resCreateStable } from "store/actions/EVENTS/stable/resCreateStable";
-import { governatesEventManager } from "./lowerManagers/govertates";
+import { governanceEventManager } from "./lowerManagers/governance";
 
 const importantSubject = ["light/aa_request", "light/aa_response"];
 
@@ -105,9 +105,7 @@ export const eventManager = (err, result) => {
         store.dispatch(resCreateStable({ ...vars }));
       }
     }
-    // фабрика
   } else if (aa_address === address) {
-    // bonded stablecoin
     if (isRes) {
       if (updatedStateVars && address in updatedStateVars) {
         updatedState({
@@ -156,8 +154,6 @@ export const eventManager = (err, result) => {
       });
     }
   } else if (aa_address === governance_aa) {
-    // govertates
-
     if (isRes) {
       if (updatedStateVars && governance_aa in updatedStateVars) {
         updatedState({
@@ -170,7 +166,7 @@ export const eventManager = (err, result) => {
     } else if (isReq) {
       const { messages } = body.unit;
       const payload = getAAPayload(messages);
-      governatesEventManager({
+      governanceEventManager({
         isReq,
         payload,
         isAuthor: body.unit.authors[0].address === activeWallet,

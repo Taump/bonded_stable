@@ -20,11 +20,11 @@ export const EditRecipientModal = ({
     valid: undefined,
   });
 
-  const [recepients, setRecepients] = useState(config.interestRecepients);
+  const [recipients, setRecipients] = useState(config.interestRecipients);
 
   useEffect(() => {
     if (
-      recepients.findIndex((r) => r.address === current) !== -1 ||
+      recipients.findIndex((r) => r.address === current) !== -1 ||
       current === activeWallet
     ) {
       setSelectAddress(current);
@@ -117,12 +117,12 @@ export const EditRecipientModal = ({
                     }}
                     onClick={() => {
                       if (
-                        recepients.findIndex(
+                        recipients.findIndex(
                           (r) => r.address === address.value
                         ) === -1 &&
                         address.value !== activeWallet
                       ) {
-                        setRecepients((r) => [
+                        setRecipients((r) => [
                           ...r,
                           {
                             name: address.value,
@@ -146,7 +146,7 @@ export const EditRecipientModal = ({
             <Select.Option key="Me" value={activeWallet}>
               Me
             </Select.Option>
-            {recepients.map((r) => (
+            {recipients.map((r) => (
               <Select.Option key={r.address} value={r.address}>
                 {r.name}
               </Select.Option>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import config from "config";
 import axios from "axios";
 
-import { popularCurrency } from "../popularCurrencty";
+import { popularCurrencies } from "../popularCurrencies";
 
 export const useGetCurrency = () => {
   const [currencies, setCurrencies] = useState([]);
@@ -13,7 +13,7 @@ export const useGetCurrency = () => {
       );
       if ("data" in allCurrenciesData) {
         const allCurrencies = allCurrenciesData.data.filter(
-          (c) => !popularCurrency.includes(c)
+          (c) => !popularCurrencies.includes(c)
         );
         setCurrencies(allCurrencies);
       }

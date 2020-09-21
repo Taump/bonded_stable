@@ -14,7 +14,7 @@ export const RedeemToken = ({
   address,
   activeWallet,
   stable_state,
-  oracleValueReserve,
+  reservePrice,
   symbol,
   type,
   actualParams,
@@ -56,7 +56,7 @@ export const RedeemToken = ({
         vars: stable_state,
         oracle_price: oraclePrice,
         timestamp: Math.floor(Date.now() / 1000),
-        oracleValueReserve,
+        reservePrice,
       });
 
     setExchange(get_exchange_result);

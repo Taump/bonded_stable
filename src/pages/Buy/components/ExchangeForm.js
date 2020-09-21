@@ -27,7 +27,7 @@ import { createExchange } from "../createExchange";
 import { getTokens } from "../selectors/getTokens";
 import { useGetRate } from "../hooks/useGetRate";
 import { useWindowSize } from "hooks/useWindowSize";
-import { popularCurrency } from "../popularCurrencty";
+import { popularCurrencies } from "../popularCurrencies";
 import { useGetCompensation } from "../hooks/useGetCompensation";
 import { updateExchangesForm } from "store/actions/settings/updateExchangesForm";
 
@@ -37,7 +37,7 @@ export const ExchangeForm = () => {
   const { exchanges_recepient, exchangesFormInit } = useSelector(
     (state) => state.settings
   );
-  const { oracleValueReserve } = useSelector((state) => state.active);
+  const { reservePrice } = useSelector((state) => state.active);
   const dispatch = useDispatch();
   const [width] = useWindowSize();
   const { data, loaded } = useSelector((state) => state.list);
@@ -301,7 +301,7 @@ export const ExchangeForm = () => {
                 <Select.Option value="gbyte" key="c-gbyte">
                   GBYTE
                 </Select.Option>
-                {popularCurrency.sort().map((c) => (
+                {popularCurrencies.sort().map((c) => (
                   <Select.Option key={"c-" + c} value={c}>
                     {c.toUpperCase()}
                   </Select.Option>
@@ -351,19 +351,17 @@ export const ExchangeForm = () => {
                   size="large"
                   suffix={
                     (exchangeRates || activeCurrency === "gbyte") &&
-                    oracleValueReserve &&
+                    reservePrice &&
                     amountCurrency &&
                     amountToken && (
                       <span style={{ color: "#ccc" }}>
                         ≈{" "}
                         {activeCurrency === "gbyte"
-                          ? (
-                              Number(amountCurrency) * oracleValueReserve
-                            ).toFixed(2)
+                          ? (Number(amountCurrency) * reservePrice).toFixed(2)
                           : (
                               Number(amountCurrency) *
                               exchangeRates *
-                              oracleValueReserve
+                              reservePrice
                             ).toFixed(2)}{" "}
                         USD
                       </span>
@@ -552,10 +550,7 @@ export const ExchangeForm = () => {
               type="primary"
               size="large"
               ref={buyRef}
-              loading={
-                isCreated ||
-                (activeCurrency !== "gbyte" && ranges.min === undefined)
-              }
+              loading={isCreated || ranges.min === undefined}
               disabled={
                 !recipient.valid ||
                 !amountCurrency ||

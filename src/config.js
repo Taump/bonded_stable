@@ -9,12 +9,12 @@ export default {
     base: {
       name: "GBYTE",
       decimals: 9,
-      oracle: "F4KHJUCLJKY4JV7M5F754LAJX4EB7M4N",
-      feed_name: "GBYTE_USD",
+      oracle: process.env.REACT_APP_RESERVE_ORACLE,
+      feed_name: process.env.REACT_APP_RESERVE_FEED_NAME,
       feedCurrency: "USD",
     },
   },
-  interestRecepients: [
+  interestRecipients: [
     { name: "Obyte Foundation", address: "FCXZXQR353XI4FIPQL6U4G2EQJL4CCU2" },
     {
       name: "Estonian Cryptocurrency Association",

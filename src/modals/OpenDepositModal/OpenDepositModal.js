@@ -39,7 +39,7 @@ export const OpenDepositModal = ({
   });
 
   const [selectAddress, setSelectAddress] = useState(undefined);
-  const [recepients, setRecepients] = useState(config.interestRecepients);
+  const [recipients, setRecipients] = useState(config.interestRecipients);
 
   const handleChangeAmount = (ev) => {
     const value = ev.target.value;
@@ -192,11 +192,11 @@ export const OpenDepositModal = ({
                     }}
                     onClick={() => {
                       if (
-                        recepients.findIndex(
+                        recipients.findIndex(
                           (r) => r.address === interestRecipient.value
                         ) === -1
                       ) {
-                        setRecepients((r) => [
+                        setRecipients((r) => [
                           ...r,
                           {
                             name: interestRecipient.value,
@@ -223,7 +223,7 @@ export const OpenDepositModal = ({
             <Select.Option key="Me" value={activeWallet}>
               Me
             </Select.Option>
-            {recepients.map((r) => (
+            {recipients.map((r) => (
               <Select.Option key={r.address} value={r.address}>
                 {r.name}
               </Select.Option>

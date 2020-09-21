@@ -17,8 +17,8 @@ const initialValues = {
   leverage: 0,
   op1: "*",
   interest_rate: 0,
-  oracle1: "F4KHJUCLJKY4JV7M5F754LAJX4EB7M4N",
-  feed_name1: "GBYTE_USD",
+  oracle1: process.env.REACT_APP_INITIAL_ORACLE,
+  feed_name1: process.env.REACT_APP_INITIAL_FEED_NAME,
   reserve_asset: "base",
   reserve_asset_decimals: 9,
 };

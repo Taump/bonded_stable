@@ -1,6 +1,6 @@
 import { openNotification } from "utils/openNotification";
 
-export const governatesEventManager = ({
+export const governanceEventManager = ({
   isReq,
   payload,
   isAuthor,
